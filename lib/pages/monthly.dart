@@ -115,19 +115,29 @@ class _MonthlyState extends State<Monthly> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      padding: EdgeInsets.all(15),
-                      color: Color(0xFF5e17eb),
-                      textColor: Colors.white,
-                      child: Text(
-                        _selectedDate == null
-                            ? 'No Date Chosen!'
-                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                      ),
-                      onPressed: _presentDatePicker,
+                    child: Row(
+                      children: [
+                        RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          padding: EdgeInsets.all(15),
+                          color: Color(0xFF5e17eb),
+                          textColor: Colors.white,
+                          child: Text(
+                            _selectedDate == null
+                                ? 'No Date Chosen!'
+                                : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                          ),
+                          onPressed: _presentDatePicker,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            print("Go");
+                          },
+                          child: Text("GO"),
+                        )
+                      ],
                     ),
                   ),
                 ],
