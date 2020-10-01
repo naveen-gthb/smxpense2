@@ -41,11 +41,15 @@ class TransactionList extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
+                      backgroundColor: Color(0xFF5e17eb),
                       radius: 30,
                       child: Padding(
                         padding: EdgeInsets.all(6),
                         child: FittedBox(
-                          child: Text('₹${transactions[index].amount}'),
+                          child: Text(
+                            '₹${transactions[index].amount}',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),

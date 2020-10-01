@@ -93,13 +93,7 @@ class _DailyState extends State<Daily> {
               padding: EdgeInsets.all(15),
               width: double.infinity,
               //height: 200,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Daily()),
-                  );
-                },
+              child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),

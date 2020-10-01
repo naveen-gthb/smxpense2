@@ -1,3 +1,4 @@
+import 'package:SMXpense/pages/today.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:intl/intl.dart';
@@ -48,13 +49,7 @@ class _MonthlyState extends State<Monthly> {
               padding: EdgeInsets.all(15),
               width: double.infinity,
               //height: 200,
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Monthly()),
-                  );
-                },
+              child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
@@ -106,44 +101,56 @@ class _MonthlyState extends State<Monthly> {
             ),
           ),
           Flexible(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.only(left: 15, right: 15),
-              width: double.infinity,
-              height: 70,
+              flex: 1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    child: Row(
-                      children: [
-                        RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          padding: EdgeInsets.all(15),
-                          color: Color(0xFF5e17eb),
-                          textColor: Colors.white,
-                          child: Text(
-                            _selectedDate == null
-                                ? 'No Date Chosen!'
-                                : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                          ),
-                          onPressed: _presentDatePicker,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15, right: 7.5),
+                      height: 75,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                        child: Text(
+                          _selectedDate == null
+                              ? 'No Date Chosen!'
+                              : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        RaisedButton(
-                          onPressed: () {
-                            print("Go");
-                          },
-                          child: Text("GO"),
-                        )
-                      ],
+                        onPressed: _presentDatePicker,
+                        color: Color(0xFF5e17eb),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 7.5, right: 15),
+                      height: 75,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Text(
+                          "Go",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        onPressed: _selectedDate == null
+                            ? null
+                            : () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Daily()),
+                                );
+                              },
+                        color: Color(0xFF5e17eb),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-          ),
+              )),
         ],
       ),
     );

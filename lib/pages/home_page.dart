@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: Transform.scale(
           scale: 1.1,
           child: FloatingActionButton(
+            tooltip: "Add Cash Transactions",
             onPressed: () => _startAddNewTransaction(context),
             backgroundColor: Color(0xFF5e17eb),
             child: Image(
