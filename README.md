@@ -1,16 +1,12 @@
 # SMXpense
+### DESCRIPTION
+<p>The main motive behind this app is to help lazy people manage their daily, weekly, and monthly expenses, organise their expenditure, and to assist them; rather make them spendthrift.</p>
 
-A new Flutter project.
+### FEATURES
+<p>We will be using the text messages (that come as a result of an online transaction) as the source of our data and analysing the same for giving useful inputs to the user such as daily expense, monthly expense, etc and categorizing the same into different domains such as groceries, stationary, food, travel etc. Another feature that we plan to add is Ledger account. In simple terms, all the transactions done by the user with his/her acquaintances (lending / receiving amount) will be recorded. This can be done by accessing the user’s contact list and then recording only those transactions done with people already existing in the contacts. We are planning to implement the app using flutter and dart (both front-end and back-end). We plan to build our app in such a way that it can be used in offline mode, and hence decided to use the internal storage as the local database of our app. Because we have structured our app to be offline, we won’t be using any of the user’s personal data for any purposes, which in-turn ensures complete data security to the user.</p>
 
-## Getting Started
+### FUTURE SCOPE
+<p>We plan to build upon our idea by shifting it to online mode based on user reviews and recommendations. This will help us in adding more features such as, intelligent automated suggestions based upon spending using different Machine Learning techniques, collecting data on server which will help user to recover data whenever needed and from anywhere. We will also be making website soon enough that would allow the user convenient access to the same interface. We will be adding alert notifications and reminders in case of online bookings (train, movies, etc), upcoming bills, and will be adding much more in the course of time.</p>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### CONSTRAINTS
+<p>The app will only be able to automate those expenditures whose text messages are received by the user. In the case otherwise, the user will have to manually add the expense. In case the user uninstalls the app, all the data might be lost as we are not collecting any data from the user on global server. But it might be recovered in the case where the user has all the old text messages still saved in the phone, because our app, when installed will provide the feature of either starting to record the expenses from the upcoming text messages or collecting data from older text messages, analysing it and then recording them right from the first saved transaction message.</p>
