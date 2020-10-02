@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 //height: 200,
                 child: RaisedButton(
+                  padding: EdgeInsets.all(10),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -98,13 +99,14 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(
-                          top: 15,
-                          left: 15,
-                        ),
+                        // padding: EdgeInsets.only(
+                        //   top: 15,
+                        //   left: 15,
+                        // ),
                         child: Text(
                           "Today",
                           style: TextStyle(
@@ -119,8 +121,8 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              padding:
-                                  EdgeInsets.only(left: 15, top: 5, right: 15),
+                              //padding:
+                              //EdgeInsets.only(left: 15, top: 5, right: 15),
                               child: Text(
                                 "₹100/300",
                                 style: TextStyle(
@@ -134,11 +136,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         padding: EdgeInsets.only(
-                          top: 10,
                           left: 15,
-                          right: 15,
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             LinearPercentIndicator(
                               width: MediaQuery.of(context).size.width - 95,
