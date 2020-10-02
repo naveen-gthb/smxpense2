@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/new_transaction.dart';
 import '../widgets/transaction_list.dart';
 import '../models/transaction.dart';
+import 'package:sms/sms.dart';
 
 class Daily extends StatefulWidget {
   @override
@@ -67,8 +67,90 @@ class _DailyState extends State<Daily> {
     });
   }
 
+  SmsQuery query = new SmsQuery();
+  List messages = new List(); //list of all messages
+  List finalMessages = new List(); //list of only messages with transactions
+
+//function that fetches messages,classifies them and extracts info
+  fetchSMS() async {
+    //print(messages);
+    int credited = 0; //number of credit msgs
+    int debited = 0; //number of debit msgs
+
+    //regex to extract amount from message
+    RegExp tester = new RegExp(
+      r"\b\d+\.*\d*\b",
+      caseSensitive: false,
+      multiLine: false,
+    );
+
+    double paid = 0.0;
+    double received = 0.0;
+
+    try {
+      print("messages length");
+      messages = await query.getAllSms;
+      print(messages.length);
+
+//loop through all messages
+      for (var i = 0; i < messages.length; i++) {
+        if ((messages[i].body)
+            .toString()
+            .toLowerCase()
+            .contains("credited with rs")) {
+          //is a credit msg?
+          print("credited message at $i");
+          // print(messages[i].body);
+          credited++;
+          finalMessages.add(messages[i]);
+          String amt = tester
+              .stringMatch((messages[i].body).toString())
+              .toString(); //match with regex to extract amt
+
+          print(amt);
+          double amt2 = double.parse(amt);
+          if (amt2 < 1000) addNewTransaction("Debited", amt2, DateTime.now());
+          received += double.parse(amt); //parse from string to double format
+          print("received: $received");
+        } else if ((messages[i].body)
+            .toString()
+            .toLowerCase()
+            .contains("debited by rs")) {
+          //is a debit msg?
+          print("debited message at $i");
+          //  print(messages[i].body);
+          debited++;
+          finalMessages.add(messages[i]);
+          String amt = tester
+              .stringMatch((messages[i].body).toString())
+              .toString(); //match with regex to extract amt
+
+          print(amt);
+
+          paid += double.parse(amt); //parse from string to double format
+          print("paid: $paid");
+        }
+      }
+
+      double total = received - paid;
+      print("creditedcount: $credited");
+      print("debitedcount: $debited");
+      print("totalpaid: $paid");
+      print("totalreceived: $received");
+      print("total: $total");
+    } catch (e) {
+      print("error");
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    initState() {
+      // TODO: implement initState
+      super.initState();
+    }
+
     return Scaffold(
       floatingActionButton: Transform.scale(
         scale: 1.1,
@@ -85,76 +167,11 @@ class _DailyState extends State<Daily> {
         title: Text("Today's Expenses"),
         backgroundColor: Color(0xFF5e17eb),
       ),
-      body: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.all(15),
-              width: double.infinity,
-              //height: 200,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: 15,
-                        left: 15,
-                      ),
-                      child: Text(
-                        "Today",
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding:
-                                EdgeInsets.only(left: 15, top: 5, right: 15),
-                            child: Text(
-                              "₹100",
-                              style: TextStyle(
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                color: Color(0xFF5e17eb),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 3,
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    //Chart(_recentTransactions),
-                    TransactionList(_userTransactions, _deleteTransaction),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+      body: FutureBuilder(
+        future: fetchSMS(),
+        builder: (context, snapshot) {
+          return TransactionList(_userTransactions, _deleteTransaction);
+        },
       ),
     );
   }

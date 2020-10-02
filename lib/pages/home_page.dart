@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import './today.dart';
@@ -5,6 +6,7 @@ import '../widgets/new_transaction.dart';
 import '../models/transaction.dart';
 import './monthly.dart';
 import 'package:intl/intl.dart';
+import './catrgories.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -124,9 +126,9 @@ class _HomePageState extends State<HomePage> {
                               //padding:
                               //EdgeInsets.only(left: 15, top: 5, right: 15),
                               child: Text(
-                                "₹100/300",
+                                "₹237/500",
                                 style: TextStyle(
-                                    fontSize: 50,
+                                    fontSize: 40,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -146,9 +148,9 @@ class _HomePageState extends State<HomePage> {
                               animation: true,
                               lineHeight: 20.0,
                               animationDuration: 2000,
-                              percent: 0.3333,
+                              percent: 0.474,
                               center: Text(
-                                "33.33%",
+                                "47.40%",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -300,7 +302,11 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.only(left: 7.5),
                         child: RaisedButton(
                           onPressed: () {
-                            print("Categories");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Categories()),
+                            );
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),

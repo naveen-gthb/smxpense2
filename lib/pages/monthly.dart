@@ -101,56 +101,57 @@ class _MonthlyState extends State<Monthly> {
             ),
           ),
           Flexible(
-              flex: 1,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 15, right: 7.5),
-                      height: 75,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        child: Text(
-                          _selectedDate == null
-                              ? 'No Date Chosen!'
-                              : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        onPressed: _presentDatePicker,
-                        color: Color(0xFF5e17eb),
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 15, right: 7.5),
+                    height: 75,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No Date Chosen!'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
+                      onPressed: _presentDatePicker,
+                      color: Color(0xFF5e17eb),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 7.5, right: 15),
-                      height: 75,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Text(
-                          "Go",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        onPressed: _selectedDate == null
-                            ? null
-                            : () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Daily()),
-                                );
-                              },
-                        color: Color(0xFF5e17eb),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 7.5, right: 15),
+                    height: 75,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
+                      child: Text(
+                        "Go",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      onPressed: _selectedDate == null
+                          ? null
+                          : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Daily()),
+                              );
+                            },
+                      color: Color(0xFF5e17eb),
                     ),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
