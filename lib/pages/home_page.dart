@@ -4,6 +4,7 @@ import './today.dart';
 import '../widgets/new_transaction.dart';
 import '../models/transaction.dart';
 import './monthly.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -65,8 +66,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        endDrawer: Drawer(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Color(0xFF5e17eb),
+            ),
+          ),
+        ),
         appBar: AppBar(
-          title: Text("SMXpense"),
+          title: Center(
+              child: Text(
+                  "${DateFormat('EEEE, d MMM').format(new DateTime.now())}")),
           backgroundColor: Color(0xFF5e17eb),
         ),
         body: Column(
